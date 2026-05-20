@@ -30,28 +30,28 @@ namespace WebApi.Endpoints
         [TranslateResultToActionResult]
         [HttpGet("{genreId}", Name = "Get Genre By Id Admin")]
         [EndpointSummary("Get Genre By Id")]
-        public async Task<GenreAdminResponse> GetById(Guid genreId, CancellationToken cancellationToken)
+        public async Task<Result<GenreAdminResponse>> GetById(Guid genreId, CancellationToken cancellationToken)
         {
             var queryResult = await mediator.Send(new GetGenreByIdQuery(genreId), cancellationToken);
-            return mapper.MapToGenreResponse(queryResult);
+            return queryResult.Map(mapper.MapToGenreResponse);
         }
 
         [TranslateResultToActionResult]
         [HttpPost(Name = "Create Genre Admin")]
         [EndpointSummary("Create Genre")]
-        public async Task<GenreAdminSummary> Create( [FromBody] CreateGenreAdminRequest request, CancellationToken cancellationToken)
+        public async Task<Result<GenreAdminSummary>> Create( [FromBody] CreateGenreAdminRequest request, CancellationToken cancellationToken)
         {
             var commandResult = await mediator.Send(new CreateGenreCommand(request.Name), cancellationToken);
-            return mapper.MapToGenreSummary(commandResult);
+            return commandResult.Map(mapper.MapToGenreSummary);
         }
 
         [TranslateResultToActionResult]
         [HttpPut("{genreId}", Name = "Update Genre Admin")]
         [EndpointSummary("Update Genre")]
-        public async Task<GenreAdminSummary> Update(Guid id, [FromBody] UpdateGenreAdminRequest request, CancellationToken cancellationToken)
+        public async Task<Result<GenreAdminSummary>> Update(Guid id, [FromBody] UpdateGenreAdminRequest request, CancellationToken cancellationToken)
         {
             var commandResult = await mediator.Send(new UpdateGenreCommand(id, request.Name), cancellationToken);
-            return mapper.MapToGenreSummary(commandResult);
+            return commandResult.Map(mapper.MapToGenreSummary);
         }
 
         [TranslateResultToActionResult]
