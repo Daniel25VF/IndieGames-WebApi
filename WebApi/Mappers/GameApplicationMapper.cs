@@ -99,6 +99,7 @@ namespace WebApi.Mappers
                     cancellationToken);
 
                 result.Add(new GameArtworkSummary(
+                    artwork.Type.ToString(),
                     urls.SmallUrl,
                     urls.MediumUrl,
                     urls.LargeUrl));

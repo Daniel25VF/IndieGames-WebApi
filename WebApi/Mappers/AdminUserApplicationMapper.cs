@@ -158,6 +158,7 @@ namespace WebApi.Mappers
                 cancellationToken);
 
             return new GameArtworkSummary(
+                applicationGameArtwork.Type.ToString(),
                 urls.SmallUrl,
                 urls.MediumUrl,
                 urls.LargeUrl);
