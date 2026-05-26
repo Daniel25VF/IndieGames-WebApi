@@ -67,10 +67,9 @@ services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
 services.AddProblemDetails();
 var app = builder.Build();
 
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors("AllowAll");
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
