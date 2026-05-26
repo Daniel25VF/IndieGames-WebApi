@@ -1,0 +1,25 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+ARG GITHUB_TOKEN
+RUN dotnet nuget add source "https://nuget.pkg.github.com/XShine555/index.json" \
+    --name "github" \
+    --username "Daniel25VF" \
+    --password "$GITHUB_TOKEN" \
+    --store-password-in-clear-text
+
+COPY WebApi/WebApi.csproj WebApi/
+RUN dotnet restore WebApi/WebApi.csproj
+
+COPY . .
+RUN dotnet publish WebApi/WebApi.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+
+COPY --from=build /app/publish ./
+
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+
+CMD ["dotnet", "WebApi.dll"]
