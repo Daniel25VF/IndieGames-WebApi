@@ -11,7 +11,7 @@
 	<ItemGroup>
 		<PackageReference Include="Amazon.Lambda.AspNetCoreServer.Hosting" Version="2.0.0" />
 		<PackageReference Include="Ardalis.Result.AspNetCore" Version="10.1.0" />
-		<PackageReference Include="IndieGames.Application" Version="0.1.125" />
+		<PackageReference Include="IndieGames.Application" Version="0.1.126" />
 		<PackageReference Include="IndieGames.Domain" Version="0.1.46" />
 		<PackageReference Include="IndieGames.Infrastructure" Version="0.1.90" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.6" />
