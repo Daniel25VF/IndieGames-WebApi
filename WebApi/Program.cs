@@ -12,6 +12,9 @@ using WebApi.Scalar;
 using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration
+    .AddJsonFile("AppSettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"AppSettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
