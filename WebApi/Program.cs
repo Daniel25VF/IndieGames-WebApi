@@ -1,4 +1,3 @@
-using Amazon.Lambda.AspNetCoreServer.Hosting;
 using Application.Configuration;
 using Infrastructure.Messaging.Configuration;
 using Infrastructure.Persistence;
@@ -60,13 +59,12 @@ services.AddCors(options =>
         policy.AllowAnyOrigin()
               .AllowAnyMethod()
               .AllowAnyHeader();
-    } );
-} );
+    });
+});
 
-services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
-services.AddProblemDetails();
 var app = builder.Build();
 
+app.UseRouting();
 app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
